@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.locationfencer.activities.SaveNoteActivity">
+
+    <TextView
+        style="@style/TitleTheme"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Create Note" />
+
+    <EditText
+        android:id="@+id/et_note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext"
+        android:padding="10dp"
+        android:lines="10"
+        android:textSize="16sp"
+        android:gravity="start"
+        android:textColorHint="@color/colorPrimary"
+        android:layout_marginTop="20dp"
+        android:layout_margin="16dp"
+        android:hint="Enter Note Text"
+        android:imeOptions="actionDone"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <Button
+            android:id="@+id/btn_create_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Reminder"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:background="@drawable/bg_button"
+            android:layout_gravity="bottom"
+            />
+
+    </FrameLayout>
+
+
+</LinearLayout>
