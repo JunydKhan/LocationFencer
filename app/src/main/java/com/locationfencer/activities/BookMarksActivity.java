@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class BookMarksActivity extends Activity implements BookmarksAdapter.BookmarkDeleteCallback, BookmarksAdapter.BookmarkOnDirectionsCallabck{
+public class BookMarksActivity extends Activity implements BookmarksAdapter.BookmarkDeleteCallback, BookmarksAdapter.BookmarkOnDirectionsCallabck {
 
     private static final int PLACE_PICKER_REQUEST = 112;
     private AppDatabase appDatabse;
@@ -58,26 +58,26 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
     }
 
     private void getAppDatabase() {
-        appDatabse = Room.databaseBuilder(this,AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
+        appDatabse = Room.databaseBuilder(this, AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
     }
 
     private void fetchBookmarkListing() {
         bookmarksList = appDatabse.appDao().getAllBookmarks();
-        if(bookmarksList.size() == 0)
+        if (bookmarksList.size() == 0)
             hideListingIfNotFound(bookmarksList);
 
         Collections.reverse(bookmarksList);
-        adapter = new BookmarksAdapter(this,bookmarksList);
+        adapter = new BookmarksAdapter(this, bookmarksList);
         RecyclerView recyclerView = findViewById(R.id.rv_bookmarks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
     private void hideListingIfNotFound(List<BookMark> bookmarksList) {
-        if(bookmarksList.size() == 0){
+        if (bookmarksList.size() == 0) {
             findViewById(R.id.tv_no_bookmarks_found).setVisibility(View.VISIBLE);
             findViewById(R.id.rv_bookmarks).setVisibility(View.GONE);
-        }else{
+        } else {
             findViewById(R.id.rv_bookmarks).setVisibility(View.VISIBLE);
             findViewById(R.id.tv_no_bookmarks_found).setVisibility(View.GONE);
         }
@@ -100,7 +100,7 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
         intent.setPackage("com.google.android.apps.maps");
         try {
             startActivity(intent);
-        } catch(ActivityNotFoundException ex) {
+        } catch (ActivityNotFoundException ex) {
             Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
         }
     }
@@ -117,7 +117,7 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
                 double latitude = place.getLatLng().latitude;
                 double longitude = place.getLatLng().longitude;
 
-                BookMark bookMark = new BookMark(bookMarkId,placeName,latitude,longitude);
+                BookMark bookMark = new BookMark(bookMarkId, placeName, latitude, longitude);
                 appDatabse.appDao().insertBookMark(bookMark);
                 bookmarksList.add(bookMark);
                 adapter.notifyDataSetChanged();

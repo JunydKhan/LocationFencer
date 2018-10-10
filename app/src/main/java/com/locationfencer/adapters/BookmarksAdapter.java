@@ -24,7 +24,7 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
     private BookmarkDeleteCallback bookmarkDeleteCallback;
     private BookmarkOnDirectionsCallabck bookmarkOnDirectionsCallabck;
 
-    public BookmarksAdapter(Context context, List<BookMark> bookMarkList){
+    public BookmarksAdapter(Context context, List<BookMark> bookMarkList) {
         this.context = context;
         this.bookmarkDeleteCallback = (BookmarkDeleteCallback) context;
         this.bookmarkOnDirectionsCallabck = (BookmarkOnDirectionsCallabck) context;
@@ -33,7 +33,7 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BookmarksViewHolder(LayoutInflater.from(context).inflate(R.layout.item_bookmark,parent,false));
+        return new BookmarksViewHolder(LayoutInflater.from(context).inflate(R.layout.item_bookmark, parent, false));
     }
 
     @Override
@@ -43,14 +43,14 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
         bookmarksViewHolder.textViewPlaceName.setText(bookMark.getPlaceName());
         bookmarksViewHolder.textViewLatLng.setText("(" + bookMark.getLatitude() + " , " + bookMark.getLatitude() + ")");
 
-        bindListeners(bookmarksViewHolder,position);
+        bindListeners(bookmarksViewHolder, position);
     }
 
     private void bindListeners(final BookmarksViewHolder bookmarksViewHolder, final int position) {
         bookmarksViewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bookmarkDeleteCallback != null)
+                if (bookmarkDeleteCallback != null)
                     bookmarkDeleteCallback.onBookmarkDelete(bookMarkList.get(position));
             }
         });
@@ -58,7 +58,7 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
         bookmarksViewHolder.imageViewDirections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bookmarkOnDirectionsCallabck != null)
+                if (bookmarkOnDirectionsCallabck != null)
                     bookmarkOnDirectionsCallabck.onDirectionClick(bookMarkList.get(position));
             }
         });
@@ -69,9 +69,18 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
         return bookMarkList.size();
     }
 
-    public class BookmarksViewHolder extends RecyclerView.ViewHolder{
-        private TextView textViewPlaceName,textViewLatLng;
+    public interface BookmarkDeleteCallback {
+        void onBookmarkDelete(BookMark bookMark);
+    }
+
+    public interface BookmarkOnDirectionsCallabck {
+        void onDirectionClick(BookMark bookMark);
+    }
+
+    public class BookmarksViewHolder extends RecyclerView.ViewHolder {
+        private TextView textViewPlaceName, textViewLatLng;
         private ImageView imageViewDelete, imageViewDirections;
+
         public BookmarksViewHolder(View itemView) {
             super(itemView);
             textViewPlaceName = itemView.findViewById(R.id.tv_place_name);
@@ -79,13 +88,5 @@ public class BookmarksAdapter extends RecyclerView.Adapter {
             imageViewDelete = itemView.findViewById(R.id.iv_delete_bookmark);
             imageViewDirections = itemView.findViewById(R.id.iv_directions);
         }
-    }
-
-    public interface BookmarkDeleteCallback {
-        void onBookmarkDelete(BookMark bookMark);
-    }
-
-    public interface BookmarkOnDirectionsCallabck{
-        void onDirectionClick(BookMark bookMark);
     }
 }

@@ -2,9 +2,8 @@ package com.locationfencer.activities;
 
 import android.app.Activity;
 import android.arch.persistence.room.Room;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,7 +30,7 @@ public class SaveNoteActivity extends Activity {
     }
 
     private void getAppDatabase() {
-        appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
     }
 
     private void bindListener() {
@@ -41,14 +40,14 @@ public class SaveNoteActivity extends Activity {
 
                 String noteText = findFieldById(R.id.et_note_text).getText().toString();
 
-                if(noteText.isEmpty()){
+                if (noteText.isEmpty()) {
                     Toast.makeText(SaveNoteActivity.this, "Please enter note text", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 String noteId = UUID.randomUUID().toString();
 
-                Note note = new Note(noteId,noteText);
+                Note note = new Note(noteId, noteText);
                 appDatabase.appDao().insertNote(note);
                 Toast.makeText(SaveNoteActivity.this, "Note create successfully", Toast.LENGTH_SHORT).show();
             }
@@ -56,7 +55,7 @@ public class SaveNoteActivity extends Activity {
 
     }
 
-    public EditText findFieldById(@IdRes int id){
+    public EditText findFieldById(@IdRes int id) {
         return (EditText) findViewById(id);
     }
 }

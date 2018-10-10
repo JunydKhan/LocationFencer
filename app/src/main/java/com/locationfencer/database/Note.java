@@ -29,21 +29,20 @@ public class Note {
         this.noteText = noteText;
     }
 
+    public String getNoteStatus() {
+        return noteStatus;
+    }
 
     public void setNoteStatus(String noteStatus) {
         this.noteStatus = noteStatus;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public String getNoteStatus() {
-        return noteStatus;
-    }
-
     public boolean isCompleted() {
         return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     @NonNull

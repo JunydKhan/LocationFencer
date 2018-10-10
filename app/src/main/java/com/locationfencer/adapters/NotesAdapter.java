@@ -24,7 +24,7 @@ public class NotesAdapter extends RecyclerView.Adapter {
     private List<Note> noteList;
     private OnNoteMarkAsCallback noteMarkAsCallback;
 
-    public NotesAdapter(Context context, List<Note> noteList){
+    public NotesAdapter(Context context, List<Note> noteList) {
         this.context = context;
         this.noteMarkAsCallback = (OnNoteMarkAsCallback) context;
         this.noteList = noteList;
@@ -32,7 +32,7 @@ public class NotesAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note,parent,false));
+        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note, parent, false));
     }
 
     @Override
@@ -41,23 +41,23 @@ public class NotesAdapter extends RecyclerView.Adapter {
         NotesViewHolder notesViewHolder = (NotesViewHolder) holder;
         notesViewHolder.textViewNoteText.setText(note.getNoteText());
         notesViewHolder.textViewNoteStatus.setText(note.getNoteStatus());
-        if(note.isCompleted()){
+        if (note.isCompleted()) {
             notesViewHolder.checkBoxMarkAs.setChecked(true);
             notesViewHolder.textViewNoteStatus.setTextColor(context.getResources().getColor(R.color.colorGreen));
-        }else{
+        } else {
             notesViewHolder.checkBoxMarkAs.setChecked(false);
             notesViewHolder.textViewNoteStatus.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         }
-        bindListeners(notesViewHolder,position);
+        bindListeners(notesViewHolder, position);
     }
 
     private void bindListeners(NotesViewHolder viewHolder, final int position) {
         viewHolder.checkBoxMarkAs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(buttonView.isPressed()){
-                     if(noteMarkAsCallback != null)
-                         noteMarkAsCallback.onMarkedAs(noteList.get(position),isChecked);
+                if (buttonView.isPressed()) {
+                    if (noteMarkAsCallback != null)
+                        noteMarkAsCallback.onMarkedAs(noteList.get(position), isChecked);
                 }
             }
         });
@@ -67,7 +67,12 @@ public class NotesAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return noteList.size();
     }
-    public class NotesViewHolder extends RecyclerView.ViewHolder{
+
+    public interface OnNoteMarkAsCallback {
+        void onMarkedAs(Note note, boolean isCompleted);
+    }
+
+    public class NotesViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewNoteText, textViewNoteStatus;
         private CheckBox checkBoxMarkAs;
@@ -78,9 +83,5 @@ public class NotesAdapter extends RecyclerView.Adapter {
             textViewNoteStatus = itemView.findViewById(R.id.tv_note_status);
             checkBoxMarkAs = itemView.findViewById(R.id.cb_mark_as);
         }
-    }
-
-    public interface OnNoteMarkAsCallback {
-        void onMarkedAs(Note note, boolean isCompleted);
     }
 }

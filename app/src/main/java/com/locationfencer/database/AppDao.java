@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Dao
-public interface AppDao  {
+public interface AppDao {
 
     /*CREATE NOTES CRUDS*/
     @Query("SELECT * FROM notes")

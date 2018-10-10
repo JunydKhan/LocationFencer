@@ -26,22 +26,22 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.locationfencer.R;
 import com.locationfencer.database.AppDatabase;
 import com.locationfencer.database.Location;
 import com.locationfencer.utils.AppGlobals;
 import com.locationfencer.utils.AppUtils;
 import com.locationfencer.utils.GeofenceTransitionsJobIntentService;
-import com.locationfencer.R;
 
 
 public class ReminderActivity extends Activity {
+    public static AppDatabase appDatabase;
     private int PLACE_PICKER_REQUEST = 112;
     private int radius = 50;
     private Geofence geofence;
     private GeofencingClient mGeofencingClient;
     private Place place;
     private PendingIntent mGeofencePendingIntent;
-    public static AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class ReminderActivity extends Activity {
     }
 
     private void getAppDatabase() {
-        appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppGlobals.DATABASE_NAME).allowMainThreadQueries().build();
     }
 
     private void getGeofenceClient() {
@@ -105,7 +105,7 @@ public class ReminderActivity extends Activity {
     @SuppressLint("NewApi")
     private void setReminder() {
         if (ActivityCompat.checkSelfPermission(ReminderActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(ReminderActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.checkSelfPermission(ReminderActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             if (!areParamsValid())
                 return;
@@ -119,26 +119,26 @@ public class ReminderActivity extends Activity {
                     .addOnSuccessListener(this, new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d("Reminder","onSuccess");
-                            Toast.makeText(ReminderActivity.this,"Reminder set succefully",Toast.LENGTH_SHORT).show();
+                            Log.d("Reminder", "onSuccess");
+                            Toast.makeText(ReminderActivity.this, "Reminder set succefully", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(this, new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d("Reminder","onFailure");
-                            Toast.makeText(ReminderActivity.this,"Reminder failed",Toast.LENGTH_SHORT).show();
+                            Log.d("Reminder", "onFailure");
+                            Toast.makeText(ReminderActivity.this, "Reminder failed", Toast.LENGTH_SHORT).show();
                         }
                     });
-        }else
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},333);
+        } else
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 333);
     }
 
     private boolean areParamsValid() {
-        if(place == null){
+        if (place == null) {
             Toast.makeText(this, "Please select location", Toast.LENGTH_SHORT).show();
             return false;
-        }else if(findFieldById(R.id.et_reminder_text).getText().toString().isEmpty()){
+        } else if (findFieldById(R.id.et_reminder_text).getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter reminder text", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -154,8 +154,8 @@ public class ReminderActivity extends Activity {
 
         try {
             appDatabase.appDao().insertLocation(location);
-        }catch (Exception e){
-            Toast.makeText(this,"This location has already added",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "This location has already added", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -213,8 +213,8 @@ public class ReminderActivity extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 333)
-            if(permissions.length > 0)
+        if (requestCode == 333)
+            if (permissions.length > 0)
                 setReminder();
     }
 }

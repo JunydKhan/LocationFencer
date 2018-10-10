@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:background="@drawable/bg_item_note">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/bg_item_note"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tv_note_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Task Testing"
-        android:textSize="18sp"
         android:layout_toStartOf="@+id/cb_mark_as"
-        />
+        android:text="Task Testing"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_note_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Completed"
-        android:textSize="16dp"
-        android:textColor="@color/colorGreen"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/tv_note_text"
-        />
+        android:layout_marginTop="10dp"
+        android:text="Completed"
+        android:textColor="@color/colorGreen"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
     <CheckBox
         android:id="@+id/cb_mark_as"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

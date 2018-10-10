@@ -2,7 +2,6 @@ package com.locationfencer.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,7 +9,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.locationfencer.R;
 import com.locationfencer.utils.AppUtils;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +28,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_set_reminder:{
-                startActivity(new Intent(MainActivity.this,ReminderActivity.class));
+        switch (v.getId()) {
+            case R.id.btn_set_reminder: {
+                startActivity(new Intent(MainActivity.this, ReminderActivity.class));
                 break;
             }
-            case R.id.btn_note:{
-                startActivity(new Intent(MainActivity.this,ShowNotesActivity.class));
+            case R.id.btn_note: {
+                startActivity(new Intent(MainActivity.this, ShowNotesActivity.class));
                 break;
             }
-            case R.id.btn_bookmark:{
-                startActivity(new Intent(MainActivity.this,BookMarksActivity.class));
+            case R.id.btn_bookmark: {
+                startActivity(new Intent(MainActivity.this, BookMarksActivity.class));
                 break;
             }
-            case R.id.btn_nearby:{
+            case R.id.btn_nearby: {
                 gotoPlacesPicker();
                 break;
             }

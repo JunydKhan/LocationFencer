@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:background="@drawable/bg_item_note">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/bg_item_note"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tv_place_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/iv_delete_bookmark"
         android:text="Place Name"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toStartOf="@+id/iv_delete_bookmark"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_lat_lng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_place_name"
-        android:text="(222,222)"
-        android:textColor="@color/colorPrimary"
-        android:layout_toStartOf="@+id/iv_directions"
         android:layout_marginTop="20dp"
-        />
+        android:layout_toStartOf="@+id/iv_directions"
+        android:text="(222,222)"
+        android:textColor="@color/colorPrimary" />
 
     <ImageView
         android:id="@+id/iv_delete_bookmark"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/icon_delete"
         android:layout_alignParentEnd="true"
-        />
+        android:src="@drawable/icon_delete" />
 
     <ImageView
         android:id="@+id/iv_directions"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/google"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/iv_delete_bookmark"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="2dp"
-        />
+        android:layout_marginTop="10dp"
+        android:src="@drawable/google" />
 
 </RelativeLayout>
