@@ -31,20 +31,20 @@ import com.locationfencer.database.AppDatabase;
 import com.locationfencer.database.Location;
 import com.locationfencer.utils.AppGlobals;
 import com.locationfencer.utils.AppUtils;
+import com.locationfencer.utils.BackNavigationActivity;
 import com.locationfencer.utils.GeofenceTransitionsJobIntentService;
 
 
-public class ReminderActivity extends Activity {
+public class ReminderActivity extends BackNavigationActivity {
     public static AppDatabase appDatabase;
     private int PLACE_PICKER_REQUEST = 112;
     private int radius = 50;
-    private Geofence geofence;
     private GeofencingClient mGeofencingClient;
     private Place place;
     private PendingIntent mGeofencePendingIntent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppUtils.setFullScreen(this);
         setContentView(R.layout.activity_reminder);
@@ -100,6 +100,8 @@ public class ReminderActivity extends Activity {
                 setReminder();
             }
         });
+
+        setOnBackClickListener();
     }
 
     @SuppressLint("NewApi")
@@ -112,8 +114,7 @@ public class ReminderActivity extends Activity {
 
             Geofence geofence = getGeofence();
             GeofencingRequest geofencingRequest = getGeofencingRequest(geofence);
-
-            saveReminder(geofence);
+            saveReminderToDb(geofence);
 
             mGeofencingClient.addGeofences(geofencingRequest, getGeofencePendingIntent())
                     .addOnSuccessListener(this, new OnSuccessListener<Void>() {
@@ -146,7 +147,7 @@ public class ReminderActivity extends Activity {
     }
 
     @NonNull
-    private void saveReminder(Geofence geofence) {
+    private void saveReminderToDb(Geofence geofence) {
         Location location = new Location(
                 geofence.getRequestId(),
                 place.getName().toString(),

@@ -31,6 +31,7 @@
         android:id="@+id/iv_delete_bookmark"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:padding="5dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/icon_delete" />
 
@@ -42,6 +43,7 @@
         android:layout_below="@+id/iv_delete_bookmark"
         android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
+        android:padding="5dp"
         android:src="@drawable/google" />
 
 </RelativeLayout>

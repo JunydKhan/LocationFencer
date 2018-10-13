@@ -1,8 +1,10 @@
 package com.locationfencer.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,13 +21,14 @@ import com.locationfencer.database.AppDatabase;
 import com.locationfencer.database.BookMark;
 import com.locationfencer.utils.AppGlobals;
 import com.locationfencer.utils.AppUtils;
+import com.locationfencer.utils.BackNavigationActivity;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class BookMarksActivity extends Activity implements BookmarksAdapter.BookmarkDeleteCallback, BookmarksAdapter.BookmarkOnDirectionsCallabck {
+public class BookMarksActivity extends BackNavigationActivity implements BookmarksAdapter.BookmarkDeleteCallback, BookmarksAdapter.BookmarkOnDirectionsCallabck {
 
     private static final int PLACE_PICKER_REQUEST = 112;
     private AppDatabase appDatabse;
@@ -34,7 +37,7 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
     private Place place;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppUtils.setFullScreen(this);
         setContentView(R.layout.activity_book_marks);
@@ -55,6 +58,8 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
                 }
             }
         });
+
+        setOnBackClickListener();
     }
 
     private void getAppDatabase() {
@@ -84,10 +89,27 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
     }
 
     @Override
-    public void onBookmarkDelete(BookMark bookMark) {
-        bookmarksList.remove(bookMark);
-        appDatabse.appDao().deleteBookMark(bookMark);
-        adapter.notifyDataSetChanged();
+    public void onBookmarkDelete(final BookMark bookMark) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Bookmark");
+        builder.setMessage("Are you sure you to delete this bookmark?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){
+                bookmarksList.remove(bookMark);
+                appDatabse.appDao().deleteBookMark(bookMark);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -121,7 +143,6 @@ public class BookMarksActivity extends Activity implements BookmarksAdapter.Book
                 appDatabse.appDao().insertBookMark(bookMark);
                 bookmarksList.add(bookMark);
                 adapter.notifyDataSetChanged();
-                hideListingIfNotFound(bookmarksList);
             }
         }
     }

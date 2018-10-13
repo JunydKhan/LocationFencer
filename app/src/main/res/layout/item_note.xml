@@ -12,25 +12,47 @@
         android:id="@+id/tv_note_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/cb_mark_as"
+        android:layout_toStartOf="@+id/iv_delete_note"
+        android:layout_marginEnd="10dp"
         android:text="Task Testing"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tv_note_status"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/iv_delete_note"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/icon_delete" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_note_text"
-        android:layout_marginTop="10dp"
-        android:text="Completed"
-        android:textColor="@color/colorGreen"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="20dp">
 
-    <CheckBox
-        android:id="@+id/cb_mark_as"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/tv_note_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Pending"
+            android:textColor="@color/colorGreen"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_mark_as"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>

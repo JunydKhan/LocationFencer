@@ -13,15 +13,16 @@ import com.locationfencer.database.AppDatabase;
 import com.locationfencer.database.Note;
 import com.locationfencer.utils.AppGlobals;
 import com.locationfencer.utils.AppUtils;
+import com.locationfencer.utils.BackNavigationActivity;
 
 import java.util.UUID;
 
-public class SaveNoteActivity extends Activity {
+public class SaveNoteActivity extends BackNavigationActivity {
 
     AppDatabase appDatabase;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppUtils.setFullScreen(this);
         setContentView(R.layout.activity_save_note);
@@ -49,9 +50,11 @@ public class SaveNoteActivity extends Activity {
 
                 Note note = new Note(noteId, noteText);
                 appDatabase.appDao().insertNote(note);
-                Toast.makeText(SaveNoteActivity.this, "Note create successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SaveNoteActivity.this, "Note created successfully", Toast.LENGTH_SHORT).show();
             }
         });
+
+        setOnBackClickListener();
 
     }
 

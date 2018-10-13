@@ -5,9 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-/**
- * Created by JUNAID_KHAN on 09/10/2018.
- */
 
 @Entity(tableName = "notes")
 public class Note {

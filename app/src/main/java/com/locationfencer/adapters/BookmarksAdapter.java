@@ -13,9 +13,6 @@ import com.locationfencer.database.BookMark;
 
 import java.util.List;
 
-/**
- * Created by JUNAID_KHAN on 10/10/2018.
- */
 
 public class BookmarksAdapter extends RecyclerView.Adapter {
 

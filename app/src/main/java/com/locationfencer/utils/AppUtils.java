@@ -5,10 +5,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-/**
- * Created by JUNAID_KHAN on 28/05/2018.
- */
-
 public class AppUtils {
     public static void setFullScreen(Activity activity) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);

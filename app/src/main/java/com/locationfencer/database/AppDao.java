@@ -25,6 +25,9 @@ public interface AppDao {
     @Update
     void updateNote(Note note);
 
+    @Delete
+    void deleteNote(Note note);
+
 
     /*SET REMINDERS CRUDS*/
     @Query("SELECT * FROM locations WHERE requestId LIKE :requestId")

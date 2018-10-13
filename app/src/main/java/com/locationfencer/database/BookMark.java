@@ -5,10 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-/**
- * Created by JUNAID_KHAN on 10/10/2018.
- */
-
 @Entity(tableName = "bookmark")
 public class BookMark {
     @NonNull

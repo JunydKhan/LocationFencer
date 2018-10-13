@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.locationfencer.R;
@@ -14,19 +15,26 @@ import com.locationfencer.database.Note;
 
 import java.util.List;
 
-/**
- * Created by JUNAID_KHAN on 10/10/2018.
- */
 
 public class NotesAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<Note> noteList;
-    private OnNoteMarkAsCallback noteMarkAsCallback;
+    private NoteMarkAsCallback noteMarkAsCallback;
+    private NoteDeleteCallback noteDeleteCallback;
+
+    public interface NoteMarkAsCallback {
+        void onMarkedAs(Note note, boolean isCompleted);
+    }
+
+    public interface NoteDeleteCallback {
+        void onNoteDelete(Note note);
+    }
 
     public NotesAdapter(Context context, List<Note> noteList) {
         this.context = context;
-        this.noteMarkAsCallback = (OnNoteMarkAsCallback) context;
+        this.noteMarkAsCallback = (NoteMarkAsCallback) context;
+        this.noteMarkAsCallback = (NoteMarkAsCallback) context;
         this.noteList = noteList;
     }
 
@@ -61,6 +69,15 @@ public class NotesAdapter extends RecyclerView.Adapter {
                 }
             }
         });
+
+        viewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(noteDeleteCallback != null){
+                    noteDeleteCallback.onNoteDelete(noteList.get(position));
+                }
+            }
+        });
     }
 
     @Override
@@ -68,20 +85,18 @@ public class NotesAdapter extends RecyclerView.Adapter {
         return noteList.size();
     }
 
-    public interface OnNoteMarkAsCallback {
-        void onMarkedAs(Note note, boolean isCompleted);
-    }
-
     public class NotesViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewNoteText, textViewNoteStatus;
         private CheckBox checkBoxMarkAs;
+        private ImageView imageViewDelete;
 
         public NotesViewHolder(View itemView) {
             super(itemView);
             textViewNoteText = itemView.findViewById(R.id.tv_note_text);
             textViewNoteStatus = itemView.findViewById(R.id.tv_note_status);
             checkBoxMarkAs = itemView.findViewById(R.id.cb_mark_as);
+            imageViewDelete = itemView.findViewById(R.id.iv_delete_note);
         }
     }
 }

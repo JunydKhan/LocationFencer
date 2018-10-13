@@ -44,6 +44,7 @@ import com.locationfencer.database.Location;
 import java.util.List;
 
 public class GeofenceTransitionsJobIntentService extends JobIntentService {
+
     private static final String TAG = "Geofence";
     private static final String CHANNEL_ID = "Channel01";
 
