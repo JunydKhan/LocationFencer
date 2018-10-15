@@ -21,7 +21,12 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCI3OOwKT_cZ7Bf_2jrxbWdocktS57eL4w" />
+            android:value="@string/google_maps_key" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
 
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -30,12 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.ReminderActivity"
+        <activity android:name=".activities.ReminderActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activities.SaveNoteActivity" />
         <activity android:name=".activities.ShowNotesActivity" />
-        <activity android:name=".activities.BookMarksActivity"></activity>
+        <activity android:name=".activities.BookMarksActivity" />
+        <activity android:name=".activities.ShowRemindersActivity" />
+        <activity android:name=".activities.GeofencePreviewActivity"/>
     </application>
 
 </manifest>

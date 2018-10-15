@@ -33,8 +33,14 @@ public interface AppDao {
     @Query("SELECT * FROM locations WHERE requestId LIKE :requestId")
     List<Location> selectLocations(String requestId);
 
+    @Query("SELECT * FROM locations")
+    List<Location> selectLocations();
+
     @Insert
     void insertLocation(Location location);
+
+    @Delete
+    void deleteLocation(Location location);
 
     /*SET BOOKMARKS CRUDS*/
     @Insert

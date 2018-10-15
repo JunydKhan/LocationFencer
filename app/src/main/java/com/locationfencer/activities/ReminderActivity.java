@@ -112,23 +112,23 @@ public class ReminderActivity extends BackNavigationActivity {
             if (!areParamsValid())
                 return;
 
-            Geofence geofence = getGeofence();
+            final Geofence geofence = getGeofence();
             GeofencingRequest geofencingRequest = getGeofencingRequest(geofence);
-            saveReminderToDb(geofence);
-
             mGeofencingClient.addGeofences(geofencingRequest, getGeofencePendingIntent())
                     .addOnSuccessListener(this, new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d("Reminder", "onSuccess");
                             Toast.makeText(ReminderActivity.this, "Reminder set succefully", Toast.LENGTH_SHORT).show();
+                            saveReminderToDb(geofence);
+                            finish();
                         }
                     })
                     .addOnFailureListener(this, new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d("Reminder", "onFailure");
-                            Toast.makeText(ReminderActivity.this, "Reminder failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReminderActivity.this, "Failed while adding geofence, try again", Toast.LENGTH_SHORT).show();
                         }
                     });
         } else
@@ -151,7 +151,10 @@ public class ReminderActivity extends BackNavigationActivity {
         Location location = new Location(
                 geofence.getRequestId(),
                 place.getName().toString(),
-                findFieldById(R.id.et_reminder_text).getText().toString());
+                findFieldById(R.id.et_reminder_text).getText().toString(),
+                place.getLatLng().latitude,
+                place.getLatLng().longitude,
+                radius);
 
         try {
             appDatabase.appDao().insertLocation(location);

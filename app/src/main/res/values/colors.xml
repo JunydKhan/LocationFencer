@@ -6,5 +6,6 @@
     <color name="colorGrey">#E1E0E0</color>
     <color name="colorGreyDark">#C1C0C0</color>
     <color name="colorGreen">#52bf09</color>
+    <color name="geofenceColor">#900377dc</color>
 
 </resources>

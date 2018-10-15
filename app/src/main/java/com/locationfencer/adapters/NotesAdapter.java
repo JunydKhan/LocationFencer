@@ -34,7 +34,7 @@ public class NotesAdapter extends RecyclerView.Adapter {
     public NotesAdapter(Context context, List<Note> noteList) {
         this.context = context;
         this.noteMarkAsCallback = (NoteMarkAsCallback) context;
-        this.noteMarkAsCallback = (NoteMarkAsCallback) context;
+        this.noteDeleteCallback = (NoteDeleteCallback) context;
         this.noteList = noteList;
     }
 
